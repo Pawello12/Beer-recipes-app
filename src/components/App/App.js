@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,17 +13,23 @@ import Home from 'routes/Home/Home';
 import 'components/App/App.module.scss';
 
 function App() {
+
+  const [user, setUser] = useState({
+    isUserLoggedIn: false,
+    userName: 'adam'
+  })
+
   return (
     <div className="App">
-      <Router>
-        <Navigation />
-        <Header />
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
+        <Router>
+          <Navigation user={user} />
+          <Header />
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
     </div>
   );
 }
