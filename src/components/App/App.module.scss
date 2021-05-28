@@ -12,3 +12,9 @@
     font-family: $main-font-family;
     color: $black;
 }
+
+:global(.App) {
+    position: relative;
+    background-color: $background-color;
+    min-height: 100vh;
+}
