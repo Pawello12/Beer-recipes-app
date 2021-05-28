@@ -8,8 +8,8 @@ const initialSearchValues = {
     beerName: '',
     hoops: '',
     yeast: '',
-    maxIBU: '',
-    minIBU: ''
+    maxIBU: null,
+    minIBU: null
 }
 
 const SearchEngine = () => {
@@ -34,9 +34,9 @@ const SearchEngine = () => {
             <label className={label} htmlFor="yeast">Yeast:</label>
             <input className={input} onChange={inputChangeHandler} value={searchValues.yeast} type="text" id='yeast' />
             <label className={label} htmlFor="maxIBU">Max IBU:</label>
-            <input className={input} onChange={inputChangeHandler} value={searchValues.maxIBU} type="number" id='maxIBU' />
+            <input className={input} onChange={inputChangeHandler} value={searchValues.maxIBU} min='0' max='140' type="number" id='maxIBU' />
             <label className={label} htmlFor="minIBU">Min IBU:</label>
-            <input className={input} onChange={inputChangeHandler} value={searchValues.minIBU} type="number" id='minIBU:' />
+            <input className={input} onChange={inputChangeHandler} value={searchValues.minIBU} min='0' max='140' type="number" id='minIBU:' />
             <Button content="Search" />
         </div>
 
