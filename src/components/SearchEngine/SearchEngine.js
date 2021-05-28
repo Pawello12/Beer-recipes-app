@@ -1,24 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Button from 'components/Button/Button';
 
 import { searchEngine, h2, input, label } from 'components/SearchEngine/SearchEngine.module.scss';
 
+const initialSearchValues = {
+    beerName: '',
+    hoops: '',
+    yeast: '',
+    maxIBU: '',
+    minIBU: ''
+}
+
 const SearchEngine = () => {
+
+    const [searchValues, setSearchValues] = useState(initialSearchValues);
+
+    const inputChangeHandler = (e) => {
+        setSearchValues({
+            ...searchValues,
+            [e.target.id]: e.target.value
+        })
+    }
+
     return(
 
         <div className={searchEngine}>
             <h2 className={h2}>Search Beer</h2>
             <label className={label} htmlFor="beerName">Beer name:</label>
-            <input className={input} type="text" id='beerName' />
+            <input className={input} onChange={inputChangeHandler} value={searchValues.beerName} type="text" id='beerName' />
             <label className={label} htmlFor="hoops">Hoops:</label>
-            <input className={input} type="text" id='hoops' />
+            <input className={input} onChange={inputChangeHandler} value={searchValues.hoops} type="text" id='hoops' />
             <label className={label} htmlFor="yeast">Yeast:</label>
-            <input className={input} type="text" id='yeast' />
+            <input className={input} onChange={inputChangeHandler} value={searchValues.yeast} type="text" id='yeast' />
             <label className={label} htmlFor="maxIBU">Max IBU:</label>
-            <input className={input} type="number" id='maxIBU' />
+            <input className={input} onChange={inputChangeHandler} value={searchValues.maxIBU} type="number" id='maxIBU' />
             <label className={label} htmlFor="minIBU">Min IBU:</label>
-            <input className={input} type="number" id='minIBU:' />
+            <input className={input} onChange={inputChangeHandler} value={searchValues.minIBU} type="number" id='minIBU:' />
             <Button content="Search" />
         </div>
 
