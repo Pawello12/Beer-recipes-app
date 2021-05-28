@@ -1,0 +1,18 @@
+@import '../../styles/theme.scss';
+
+.button {
+    background-color: $primary;
+    width: 80%;
+    max-width: 350px;
+    height: 50px;
+    margin: 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: $small;
+    font-weight: 700;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: $secondary;
+    }
+}

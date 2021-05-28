@@ -1,5 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Pattaya&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+
+@import '../../styles/theme.scss';
+
+// font-family: 'Pattaya', sans-serif;
+// font-family: 'Roboto', sans-serif;
+
 :global(*) {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: $main-font-family;
+    color: $black;
 }
