@@ -1,0 +1,33 @@
+@import '../../styles/theme.scss';
+
+.searchEngine {
+    background-color: $secondary;
+    padding: 10px;
+    border-radius: 10px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.h2 {
+    font-size: $medium;
+    font-family: 'Pattaya', sans-serif;
+    margin-bottom: 2px;
+}
+
+.input {
+    width: 80%;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    padding: 5px 10px;
+    margin: 2px;
+    text-align: center;
+    outline: none;
+}
+
+.label {
+    margin: 2px;
+}
