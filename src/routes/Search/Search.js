@@ -3,16 +3,17 @@ import axios from 'axios';
 
 import SearchEngine from 'components/SearchEngine/SearchEngine';
 import ResultCard from 'components/ResultCard/ResultCard';
+import Button from 'components/Button/Button';
 
 const apiUrl =  "https://api.punkapi.com/v2/beers";
 const randomUrl = "https://api.punkapi.com/v2/beers/random";
 
 const initialSearchValues = {
     beerName: '',
-    hoops: '',
+    hops: '',
     yeast: '',
-    maxIBU: '',
-    minIBU: ''
+    maxIBU: 120,
+    minIBU: 1,
 }
 
 const Search = () => {
@@ -21,6 +22,9 @@ const Search = () => {
     const [beers, setBeers] = useState([]);
     const [isLoading, setIsloading] = useState(false);
     const [isError, setIsError] = useState(false);
+    const [page, setPage] = useState(1);
+    const [lastUrl, setLastUrl] = useState('');
+    const [showMoreBeerButton, setShowMoreBeerButton] = useState(false);
 
     const inputChangeHandler = (e) => {
         setSearchValues({
@@ -35,8 +39,39 @@ const Search = () => {
             setIsError(false);
             setIsloading(true);
             setBeers([]);
+            setPage(1);
+
             const params = [];
-            const customUrl = apiUrl;
+            if (searchValues.beerName !== '') {
+                const words = searchValues.beerName.split(' ')
+                params.push(`beer_name=${words.join('_')}`);
+            }
+            if (searchValues.hops !== '') {
+                const words = searchValues.hops.split(' ');
+                params.push(`hops=${words.join('_')}`);
+            }
+            if (searchValues.yeast !== '') {
+                const words = searchValues.yeast.split(' ');
+                params.push(`yeast=${words.join('_')}`)
+            }
+            if (searchValues.maxIBU !== '') {
+                params.push(`ibu_lt=${searchValues.maxIBU}`)
+            }
+            if (searchValues.minIBU !== '') {
+                params.push(`ibu_gt=${searchValues.minIBU}`)
+            }
+
+            console.log(params);
+            let customUrl;
+
+            if (params.length > 0) {
+                customUrl = apiUrl + '?' + params.join('&')
+            } else {
+                customUrl = apiUrl;
+            }
+
+            console.log(customUrl);
+            setLastUrl(customUrl);
             axios.get(customUrl)
                 .then(response => {
                     console.log(response.data);
@@ -47,6 +82,9 @@ const Search = () => {
                     console.log(beerList);
                     setBeers(beerList);
                     setIsloading(false);
+                    if (beerList.length > 24) {
+                        setShowMoreBeerButton(true);
+                    }
                 })
                 .catch(error => {
                     console.log(error);
@@ -77,10 +115,37 @@ const Search = () => {
         }
     }
 
+    const nextBeers = () => {
+        if (beers.length > 24 && showMoreBeerButton === true) {
+        return <Button content="More beer!" clickHandler={loadNextBeers} />
+        }
+    }
+
+    const loadNextBeers = () => {
+        setPage(page + 1);
+        axios.get(lastUrl + `&page=${page}`)
+            .then(response => {
+                    const beerList = [];
+                    response.data.forEach(beer => {
+                        beerList.push(beer);
+                    })
+                    console.log(beerList);
+                    setBeers(beers.concat(beerList));
+                    if(response.data.length < 25) {
+                        setShowMoreBeerButton(false);
+                    }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+    }
+
     return(
         <>
             <SearchEngine inputChangeHandler={inputChangeHandler} searchValues={searchValues} searchHandler={searchHandler} getRandomBeer={getRandomBeer} isLoading={isLoading} isError={isError} />
             {beers.map((beer, index) => <ResultCard key={index} data={beer} />)}
+            {nextBeers()}
         </>
     )
 }

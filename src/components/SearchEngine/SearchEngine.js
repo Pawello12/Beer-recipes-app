@@ -13,14 +13,14 @@ const SearchEngine = ({inputChangeHandler, searchValues, searchHandler, getRando
             <h2 className={h2}>Search Beer</h2>
             <label className={label} htmlFor="beerName">Beer name:</label>
             <input className={input} onChange={inputChangeHandler} value={searchValues.beerName} type="text" id='beerName' />
-            <label className={label} htmlFor="hoops">Hoops:</label>
-            <input className={input} onChange={inputChangeHandler} value={searchValues.hoops} type="text" id='hoops' />
+            <label className={label} htmlFor="hoops">Hop:</label>
+            <input className={input} onChange={inputChangeHandler} value={searchValues.hops} type="text" id='hops' />
             <label className={label} htmlFor="yeast">Yeast:</label>
             <input className={input} onChange={inputChangeHandler} value={searchValues.yeast} type="text" id='yeast' />
             <label className={label} htmlFor="maxIBU">Max IBU:</label>
             <input className={input} onChange={inputChangeHandler} value={searchValues.maxIBU} min='0' max='120' type="number" id='maxIBU' />
             <label className={label} htmlFor="minIBU">Min IBU:</label>
-            <input className={input} onChange={inputChangeHandler} value={searchValues.minIBU} min='0' max='120' type="number" id='minIBU:' />
+            <input className={input} onChange={inputChangeHandler} value={searchValues.minIBU} min='0' max='120' type="number" id='minIBU' />
             <Button content="Search" clickHandler={searchHandler}  />
             <Button content="Random beer" clickHandler={getRandomBeer}  />
             <LoadingSpinner isLoading={isLoading} isError={isError} />
