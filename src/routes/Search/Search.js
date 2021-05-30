@@ -4,6 +4,7 @@ import axios from 'axios';
 import SearchEngine from 'components/SearchEngine/SearchEngine';
 import ResultCard from 'components/ResultCard/ResultCard';
 
+const apiUrl =  "https://api.punkapi.com/v2/beers";
 const randomUrl = "https://api.punkapi.com/v2/beers/random";
 
 const initialSearchValues = {
@@ -29,7 +30,30 @@ const Search = () => {
     }
 
     const searchHandler = () => {
-        console.log(searchValues);
+        if (isLoading === false) {
+            console.log(searchValues);
+            setIsError(false);
+            setIsloading(true);
+            setBeers([]);
+            const params = [];
+            const customUrl = apiUrl;
+            axios.get(customUrl)
+                .then(response => {
+                    console.log(response.data);
+                    const beerList = [];
+                    response.data.forEach(beer => {
+                        beerList.push(beer);
+                    })
+                    console.log(beerList);
+                    setBeers(beerList);
+                    setIsloading(false);
+                })
+                .catch(error => {
+                    console.log(error);
+                    setIsloading(false);
+                    setIsError(true);
+                })
+        }
     }
 
     const getRandomBeer = () => {
@@ -39,8 +63,10 @@ const Search = () => {
         setIsloading(true);
         axios.get(randomUrl)
             .then(response => {
-                console.log(response);
-                setBeers([response.data]);
+                console.log(response.data);
+                const beerList = [];
+                beerList.push(response.data[0])
+                setBeers(beerList);
                 setIsloading(false);
             })
             .catch(error => {
@@ -54,7 +80,7 @@ const Search = () => {
     return(
         <>
             <SearchEngine inputChangeHandler={inputChangeHandler} searchValues={searchValues} searchHandler={searchHandler} getRandomBeer={getRandomBeer} isLoading={isLoading} isError={isError} />
-            {beers.map((beer, index) => <ResultCard key={index} data={beer[0]} />)}
+            {beers.map((beer, index) => <ResultCard key={index} data={beer} />)}
         </>
     )
 }
