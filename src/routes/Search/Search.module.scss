@@ -1,0 +1,12 @@
+.topBtn {
+    position: fixed;
+    bottom: -50px;
+    right: 15px;
+    transition: transform 0.3s;
+    // display: none;
+}
+
+.topBtnActive {
+    // display: block;
+    transform: translateY(-70px);
+}

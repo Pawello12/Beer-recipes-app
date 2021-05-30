@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons'
 
 import SearchEngine from 'components/SearchEngine/SearchEngine';
 import ResultCard from 'components/ResultCard/ResultCard';
 import Button from 'components/Button/Button';
+
+import {topBtn, topBtnActive} from 'routes/Search/Search.module.scss';
 
 const apiUrl =  "https://api.punkapi.com/v2/beers";
 const randomUrl = "https://api.punkapi.com/v2/beers/random";
@@ -25,6 +29,25 @@ const Search = () => {
     const [page, setPage] = useState(1);
     const [lastUrl, setLastUrl] = useState('');
     const [showMoreBeerButton, setShowMoreBeerButton] = useState(false);
+    const [showBackToTop, setShowBackToTop] = useState(false);
+
+    const showButton = () => {
+        console.log(window.scrollY);
+        if (window.scrollY > 100) {
+            setShowBackToTop(true)
+        } else {
+            setShowBackToTop(false)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', showButton)
+    }, [])
+
+    const scrollToTopHandler = () => {
+        window.scrollTo(0, 0)
+    }
+
 
     const inputChangeHandler = (e) => {
         setSearchValues({
@@ -138,7 +161,6 @@ const Search = () => {
             .catch(error => {
                 console.log(error)
             })
-
     }
 
     return(
@@ -146,6 +168,7 @@ const Search = () => {
             <SearchEngine inputChangeHandler={inputChangeHandler} searchValues={searchValues} searchHandler={searchHandler} getRandomBeer={getRandomBeer} isLoading={isLoading} isError={isError} />
             {beers.map((beer, index) => <ResultCard key={index} data={beer} />)}
             {nextBeers()}
+            <FontAwesomeIcon icon={faArrowAltCircleUp} size="3x" onClick={scrollToTopHandler} className={`${topBtn} ${showBackToTop ? topBtnActive : null}`} />
         </>
     )
 }

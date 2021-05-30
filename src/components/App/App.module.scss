@@ -13,6 +13,10 @@
     color: $black;
 }
 
+:global(html) {
+    scroll-behavior: smooth;
+}
+
 :global(.App) {
     position: relative;
     background-color: $background-color;
