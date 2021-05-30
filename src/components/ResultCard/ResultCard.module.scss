@@ -5,6 +5,7 @@
     margin-bottom: 10px;
     width: 100%;
     padding: 10px;
+    font-size: $extra-small;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -16,4 +17,22 @@
     max-height: 100px;
     width: auto;
     margin: 4px;
+}
+
+.ul {
+    width: 85%;
+    margin-bottom: 5px;
+}
+
+.h4 {
+    font-size: $small;
+}
+
+.h3 {
+    font-size: $medium;
+}
+
+.p {
+    text-indent: 10px;
+    text-align: justify;
 }
