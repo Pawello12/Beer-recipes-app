@@ -3,12 +3,13 @@
 .resultCard {
     background-color: $secondary;
     margin-bottom: 10px;
-    width: 90%;
+    width: 100%;
     padding: 10px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    grid-column: 1/1;
 }
 
 .img {
