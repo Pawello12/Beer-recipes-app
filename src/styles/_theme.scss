@@ -1,7 +1,7 @@
 $black: #000;
 $white: #fff;
 $primary: #5BEB67;
-$secondary: #EBC567;
+$secondary: #ebc567;
 $red: #EB5B8E;
 $green: #74EB7E;
 $background-color: #8AA5EB;
@@ -17,3 +17,35 @@ $medium: 20px;
 $large: 26px;
 $extra-large: 40px;
 $enormous: 60px;
+
+@mixin form {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+
+    h2 {
+        font-family: $second-font-family;
+        margin-bottom: 10px;
+    }
+
+    input {
+        width: 90%;
+        height: 30px;
+        border-radius: 10px;
+        border: none;
+        padding: 5px 10px;
+        margin: 2px;
+        text-align: center;
+        outline: none;
+    }
+
+    label {
+        margin: 5px 0 2px;
+        font-size: $small;
+    }
+}
