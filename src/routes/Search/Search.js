@@ -56,7 +56,8 @@ const Search = () => {
         })
     }
 
-    const searchHandler = () => {
+    const searchHandler = (e) => {
+        e.preventDefault();
         if (isLoading === false) {
             console.log(searchValues);
             setIsError(false);
@@ -117,7 +118,8 @@ const Search = () => {
         }
     }
 
-    const getRandomBeer = () => {
+    const getRandomBeer = (e) => {
+        e.preventDefault();
         if (isLoading === false) {
         console.log('random');
         setIsError(false);

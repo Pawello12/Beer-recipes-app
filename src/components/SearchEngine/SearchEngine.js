@@ -9,7 +9,7 @@ import { searchEngine, h2, input, label } from 'components/SearchEngine/SearchEn
 
 const SearchEngine = ({inputChangeHandler, searchValues, searchHandler, getRandomBeer, isLoading, isError}) => {
     return(
-        <div className={searchEngine}>
+        <form className={searchEngine}>
             <h2 className={h2}>Search Beer</h2>
             <label className={label} htmlFor="beerName">Beer name:</label>
             <input className={input} onChange={inputChangeHandler} value={searchValues.beerName} type="text" id='beerName' />
@@ -24,7 +24,7 @@ const SearchEngine = ({inputChangeHandler, searchValues, searchHandler, getRando
             <Button content="Search" clickHandler={searchHandler}  />
             <Button content="Random beer" clickHandler={getRandomBeer}  />
             <LoadingSpinner isLoading={isLoading} isError={isError} />
-        </div>
+        </form>
     )
 }
 
