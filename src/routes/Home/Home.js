@@ -10,8 +10,8 @@ const Home = () => {
         <div className={home}>
             <h1 className={name}>Beer Recipes App</h1>
             <p className={description}>Log in to add recipes to your favourite.</p>
-            <Button content="Log in" />
-            <Button content="Create account" />
+            <NavLink to="login" ><Button content="Log in" /></NavLink>
+            <NavLink to="register" ><Button content="Create account" /></NavLink>
             <NavLink to="search" ><Button content="Stay logged off" /></NavLink>
         </div>
     )
