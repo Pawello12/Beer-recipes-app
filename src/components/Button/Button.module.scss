@@ -3,7 +3,7 @@
 .button {
     background-color: $primary;
     width: 70vw;
-    max-width: 300px;
+    max-width: 280px;
     height: 50px;
     margin: 12px;
     border-radius: 20px;
@@ -11,7 +11,7 @@
     font-size: $small;
     font-weight: 700;
     transition: background-color 0.2s;
-    // justify-self: flex-end;
+    justify-self: center;
     // align-self: flex-end;
     grid-column: 1/-1;
 
