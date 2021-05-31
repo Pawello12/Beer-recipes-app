@@ -26,13 +26,13 @@ const Search = () => {
     const [beers, setBeers] = useState([]);
     const [isLoading, setIsloading] = useState(false);
     const [isError, setIsError] = useState(false);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(2);
     const [lastUrl, setLastUrl] = useState('');
     const [showMoreBeerButton, setShowMoreBeerButton] = useState(false);
     const [showBackToTop, setShowBackToTop] = useState(false);
 
     const showButton = () => {
-        console.log(window.scrollY);
+        // console.log(window.scrollY);
         if (window.scrollY > 100) {
             setShowBackToTop(true)
         } else {
@@ -62,7 +62,7 @@ const Search = () => {
             setIsError(false);
             setIsloading(true);
             setBeers([]);
-            setPage(1);
+            setPage(2);
 
             const params = [];
             if (searchValues.beerName !== '') {
@@ -145,14 +145,17 @@ const Search = () => {
     }
 
     const loadNextBeers = () => {
-        setPage(page + 1);
-        axios.get(lastUrl + `&page=${page}`)
+        console.log(page)
+        axios.get(lastUrl + `&page=${page + 1}`)
             .then(response => {
                     const beerList = [];
+                    console.log(lastUrl + `&page=${page}`)
                     response.data.forEach(beer => {
                         beerList.push(beer);
                     })
                     console.log(beerList);
+                    const nextpage = page + 1;
+                    setPage(nextpage);
                     setBeers(beers.concat(beerList));
                     if(response.data.length < 25) {
                         setShowMoreBeerButton(false);
