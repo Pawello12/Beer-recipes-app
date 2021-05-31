@@ -1,0 +1,9 @@
+@import '../../styles/theme.scss';
+
+.favourites {
+    grid-column: 1 / -1;
+
+    h2 {
+        text-align: center;
+    }
+}

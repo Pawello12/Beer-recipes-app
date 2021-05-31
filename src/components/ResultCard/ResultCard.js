@@ -4,7 +4,7 @@ import Button from 'components/Button/Button';
 
 import { resultCard, img, ul, h4, h3, p } from 'components/ResultCard/ResultCard.module.scss';
 
-const ResultCard = ({data}) => {
+const ResultCard = ({data, buttonContent}) => {
     console.log(data);
      const {name, image_url, tagline, description, ibu, ebc, abv, volume, ingredients, method} = data;
     return(
@@ -37,7 +37,7 @@ const ResultCard = ({data}) => {
                 <li>Yeast {ingredients.yeast}</li>
                 <li>Temperature: <strong>{method.fermentation.temp.value} {method.fermentation.temp.unit}</strong></li>
             </ul>
-            <Button content="Add to favourites" style={{marginTop: 'auto'}} />
+            <Button content={buttonContent ? buttonContent : "Add to favourites"} style={{marginTop: 'auto'}} />
         </div>
     )
 }
