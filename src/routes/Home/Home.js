@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 import Button from 'components/Button/Button';
 
@@ -11,7 +12,7 @@ const Home = () => {
             <p className={description}>Log in to add recipes to your favourite.</p>
             <Button content="Log in" />
             <Button content="Create account" />
-            <Button content="Stay logged off" />
+            <NavLink to="search" ><Button content="Stay logged off" /></NavLink>
         </div>
     )
 }
