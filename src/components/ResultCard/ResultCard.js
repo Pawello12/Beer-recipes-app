@@ -37,7 +37,7 @@ const ResultCard = ({data}) => {
                 <li>Yeast {ingredients.yeast}</li>
                 <li>Temperature: <strong>{method.fermentation.temp.value} {method.fermentation.temp.unit}</strong></li>
             </ul>
-            <Button content="Add to favourites" />
+            <Button content="Add to favourites" style={{marginTop: 'auto'}} />
         </div>
     )
 }
