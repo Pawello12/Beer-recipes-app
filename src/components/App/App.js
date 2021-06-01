@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,20 +13,47 @@ import Favourites from 'routes/Favourites/Favourites';
 import LogIn from 'routes/LogIn/LogIn';
 import Register from 'routes/Register/Register';
 
+import LoggedUserContext from 'context/LoggedUserContext';
+
 import 'components/App/App.module.scss';
 import {backgroundContainer} from 'components/App/App.module.scss';
+
+const authUrl = 'http://localhost:1337/auth/local';
 
 function App() {
 
   const [user, setUser] = useState({
     isUserLoggedIn: false,
-    userName: 'adam'
+    userName: '',
+    token: ''
   })
+
+  const updateUserState = () => {
+    const token = localStorage.getItem('token');
+      const username = localStorage.getItem('username');
+      if (token != null && username != null) {
+        setUser({
+          isUserLoggedIn: true,
+          userName: username,
+          token: token
+        })
+      }
+  }
+
+  useEffect(() => {
+    updateUserState();
+    window.addEventListener('storage', () => {
+      updateUserState();
+    })
+  }, [])
+
+
 
   return (
     <div className="App">
+      <LoggedUserContext.Provider value={{user, setUser}}>
         <Router>
-          <Navigation user={user} />
+          <Navigation />
           <Header />
           <Switch>
             <Route exact path='/'>
@@ -50,7 +77,8 @@ function App() {
             </Route>
           </Switch>
         </Router>
-        <div className={backgroundContainer}></div>
+      </LoggedUserContext.Provider>
+      <div className={backgroundContainer}></div>
     </div>
   );
 }
