@@ -23,13 +23,20 @@ const Navigation = () => {
         setMenuOpen(false);
     }
 
+    const logOut = () => {
+        localStorage.clear();
+        closeMenuAfterClickButton();
+    }
+
+
+
     return (
         <nav className={menuOpen ? `${nav} ${navActive}` : `${nav}`} >
             <FontAwesomeIcon className={menuOpen ? `${openMenu} ${openMenuActive}` : `${openMenu}`} onClick={openMenuHandler} icon={faChevronCircleRight} size={'2x'} />
             {user.user.isUserLoggedIn ? <h2>{`Hello ${user.user.userName}`}</h2>: null}
             {!user.user.isUserLoggedIn ? <NavLink to="/login" ><Button content={'Log In'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
             {!user.user.isUserLoggedIn ? <NavLink to="/register" ><Button content={'Create Account'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
-            {user.user.isUserLoggedIn ? <NavLink exact to="/" ><Button content={'Log out'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
+            {user.user.isUserLoggedIn ? <NavLink exact to="/" ><Button content={'Log out'} clickHandler={logOut} to='/login'/></NavLink> : null}
             {user.user.isUserLoggedIn ? <NavLink to="/favourites" ><Button content={'Favourites'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
             {user.user.isUserLoggedIn ? <NavLink to="/search" ><Button content={'Search'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
         </nav>

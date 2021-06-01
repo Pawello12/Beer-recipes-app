@@ -31,11 +31,17 @@ function App() {
   const updateUserState = () => {
     const token = localStorage.getItem('token');
       const username = localStorage.getItem('username');
-      if (token != null && username != null) {
+      if (token !== null && username !== null) {
         setUser({
           isUserLoggedIn: true,
           userName: username,
           token: token
+        })
+      } else {
+        setUser({
+          isUserLoggedIn: false,
+          userName: '',
+          token: ''
         })
       }
   }
@@ -46,6 +52,7 @@ function App() {
       updateUserState();
     })
   }, [])
+
 
 
 
