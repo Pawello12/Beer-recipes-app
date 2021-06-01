@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 import Button from 'components/Button/Button';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import LoggedUserContext from 'context/LoggedUserContext';
 
 import {register} from 'routes/Register/Register.module.scss';
 
@@ -19,10 +20,10 @@ const initialInputsValue = {
 const Register = () => {
 
     const [registerInputs, setRegisterInputs] = useState(initialInputsValue)
-
     const [errorMessage, setErrorMessage] = useState('');
-
     const [redistered, setRegistered] = useState(false);
+
+    const UserContext = useContext(LoggedUserContext);
 
     const verifyRegisterForm = () => {
         if (registerInputs.username === '' || registerInputs.password === '' || registerInputs.confirmPassword === '') {
@@ -75,7 +76,11 @@ const Register = () => {
 
                 localStorage.setItem('token', response.data.jwt);
                 localStorage.setItem('username', response.data.user.username);
-
+                UserContext.setUser({
+                    isUserLoggedIn: true,
+                    userName: response.data.user.username,
+                    token: response.data.jwt
+                })
                 setRegistered(true);
 
             })
@@ -108,7 +113,7 @@ const Register = () => {
         <label htmlFor="confirmPassword">Repeat password:</label>
         <input type="password" id="confirmPassword" onChange={inputChangeHandler} value={registerInputs.confirmPassword} />
         <ErrorMessage error={errorMessage} />
-        <Button content="Log In" clickHandler={sendNewUser} type="submit" />
+        <Button content="Register" clickHandler={sendNewUser} type="submit" />
         {redistered ? <Redirect to="/search" /> : null}
     </form>
     )
