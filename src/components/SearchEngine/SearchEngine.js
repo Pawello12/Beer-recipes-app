@@ -13,7 +13,7 @@ const SearchEngine = ({inputChangeHandler, searchValues, searchHandler, getRando
             <h2 className={h2}>Search Beer</h2>
             <label className={label} htmlFor="beerName">Beer name:</label>
             <input className={input} onChange={inputChangeHandler} value={searchValues.beerName} type="text" id='beerName' />
-            <label className={label} htmlFor="hoops">Hop:</label>
+            <label className={label} htmlFor="hops">Hop:</label>
             <input className={input} onChange={inputChangeHandler} value={searchValues.hops} type="text" id='hops' />
             <label className={label} htmlFor="yeast">Yeast:</label>
             <input className={input} onChange={inputChangeHandler} value={searchValues.yeast} type="text" id='yeast' />

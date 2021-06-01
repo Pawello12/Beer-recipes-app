@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Button from 'components/Button/Button';
+import LoggedUserContext from 'context/LoggedUserContext';
 
 import { resultCard, img, ul, h4, h3, p } from 'components/ResultCard/ResultCard.module.scss';
 
 const ResultCard = ({data, buttonContent}) => {
-    console.log(data);
+
+    const UserContext = useContext(LoggedUserContext);
+
      const {name, image_url, tagline, description, ibu, ebc, abv, volume, ingredients, method} = data;
     return(
         <div className={resultCard}>
@@ -37,7 +40,7 @@ const ResultCard = ({data, buttonContent}) => {
                 <li>Yeast {ingredients.yeast}</li>
                 <li>Temperature: <strong>{method.fermentation.temp.value} {method.fermentation.temp.unit}</strong></li>
             </ul>
-            <Button content={buttonContent ? buttonContent : "Add to favourites"} style={{marginTop: 'auto'}} />
+            {UserContext.user.isUserLoggedIn ? <Button content={buttonContent ? buttonContent : "Add to favourites"} style={{marginTop: 'auto'}} /> : null}
         </div>
     )
 }
