@@ -115,6 +115,7 @@ const Register = () => {
         <ErrorMessage error={errorMessage} />
         <Button content="Register" clickHandler={sendNewUser} type="submit" />
         {redistered ? <Redirect to="/search" /> : null}
+        {UserContext.user.isUserLoggedIn ? <Redirect to="/search" /> : null}
     </form>
     )
 }

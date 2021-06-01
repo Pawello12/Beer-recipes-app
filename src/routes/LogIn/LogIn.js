@@ -77,6 +77,7 @@ const LogIn = () => {
             <ErrorMessage error={errorMessage} />
             <Button content="Log In" clickHandler={logInHandler} type="submit" />
             {isLoggedIn ? <Redirect to="/search" /> : null}
+            {UserContext.user.isUserLoggedIn ? <Redirect to="/search" /> : null}
         </form>
     )
 }
