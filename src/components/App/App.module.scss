@@ -25,7 +25,7 @@
 
 :global(.App) {
     position: relative;
-    background-color: $background-color;
+    background-color: transparent;
     min-height: 100vh;
     width: 100%;
     // max-width: 100vw;
@@ -36,9 +36,7 @@
     grid-template-rows: 50px min-content auto;
     column-gap: 10px;
     padding: 0 10px;
-    background-image: url('../../img/home/beer_1920.jpg');
-    background-size: cover;
-    background-position: center bottom;
+
 
     @media (min-width: 760px) {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -53,4 +51,18 @@
     @media (min-width: 1500px) {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
     }
+}
+
+.backgroundContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: $background-color;
+    background-image: url('../../img/home/beer_1920.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    z-index: -1;
 }

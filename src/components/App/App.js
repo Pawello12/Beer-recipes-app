@@ -14,6 +14,7 @@ import LogIn from 'routes/LogIn/LogIn';
 import Register from 'routes/Register/Register';
 
 import 'components/App/App.module.scss';
+import {backgroundContainer} from 'components/App/App.module.scss';
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
             </Route>
           </Switch>
         </Router>
+        <div className={backgroundContainer}></div>
     </div>
   );
 }
