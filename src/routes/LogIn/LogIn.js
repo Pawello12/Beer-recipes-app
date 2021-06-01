@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 import Button from 'components/Button/Button';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import LoggedUserContext from 'context/LoggedUserContext';
 
 import {logIn} from 'routes/LogIn/LogIn.module.scss';
 
@@ -19,6 +20,8 @@ const LogIn = () => {
     const [inputValue, setInputValue] = useState(initialInputValue);
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const UserContext = useContext(LoggedUserContext)
 
     const updateInputValue = (e) => {
         setInputValue({
@@ -50,6 +53,11 @@ const LogIn = () => {
                 setErrorMessage('');
                 localStorage.setItem('token', response.data.jwt);
                 localStorage.setItem('username', response.data.user.username);
+                UserContext.setUser({
+                    userName: response.data.user.username,
+                    token: response.data.jwt,
+                    isUserLoggedIn: true
+                })
                 setIsLoggedIn(true);
             })
             .catch(error => {
