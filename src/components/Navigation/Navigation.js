@@ -12,8 +12,8 @@ const Navigation = () => {
 
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const user = useContext(LoggedUserContext);
-    console.log(user.user)
+    const UserContext = useContext(LoggedUserContext);
+    // console.log(UserContext.setUser)
 
     const openMenuHandler = () => {
         setMenuOpen((prevState) => !prevState);
@@ -25,6 +25,11 @@ const Navigation = () => {
 
     const logOut = () => {
         localStorage.clear();
+        UserContext.setUser({
+            isUserLoggedIn: false,
+            userName: '',
+            token: ''
+        })
         closeMenuAfterClickButton();
     }
 
@@ -33,12 +38,12 @@ const Navigation = () => {
     return (
         <nav className={menuOpen ? `${nav} ${navActive}` : `${nav}`} >
             <FontAwesomeIcon className={menuOpen ? `${openMenu} ${openMenuActive}` : `${openMenu}`} onClick={openMenuHandler} icon={faChevronCircleRight} size={'2x'} />
-            {user.user.isUserLoggedIn ? <h2>{`Hello ${user.user.userName}`}</h2>: null}
-            {!user.user.isUserLoggedIn ? <NavLink to="/login" ><Button content={'Log In'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
-            {!user.user.isUserLoggedIn ? <NavLink to="/register" ><Button content={'Create Account'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
-            {user.user.isUserLoggedIn ? <NavLink exact to="/" ><Button content={'Log out'} clickHandler={logOut} to='/login'/></NavLink> : null}
-            {user.user.isUserLoggedIn ? <NavLink to="/favourites" ><Button content={'Favourites'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
-            {user.user.isUserLoggedIn ? <NavLink to="/search" ><Button content={'Search'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
+            {UserContext.user.isUserLoggedIn ? <h2>{`Hello ${UserContext.user.userName}`}</h2>: null}
+            {!UserContext.user.isUserLoggedIn ? <NavLink to="/login" ><Button content={'Log In'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
+            {!UserContext.user.isUserLoggedIn ? <NavLink to="/register" ><Button content={'Create Account'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
+            {UserContext.user.isUserLoggedIn ? <NavLink exact to="/" ><Button content={'Log out'} clickHandler={logOut} to='/login'/></NavLink> : null}
+            {UserContext.user.isUserLoggedIn ? <NavLink to="/favourites" ><Button content={'Favourites'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
+            {UserContext.user.isUserLoggedIn ? <NavLink to="/search" ><Button content={'Search'} clickHandler={closeMenuAfterClickButton} to='/login'/></NavLink> : null}
         </nav>
     )
 }
