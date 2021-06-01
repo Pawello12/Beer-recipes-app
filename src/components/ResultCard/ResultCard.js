@@ -1,15 +1,43 @@
 import React, { useContext } from 'react';
+import axios from 'axios';
 
 import Button from 'components/Button/Button';
 import LoggedUserContext from 'context/LoggedUserContext';
 
 import { resultCard, img, ul, h4, h3, p } from 'components/ResultCard/ResultCard.module.scss';
 
-const ResultCard = ({data, buttonContent, beerIndex}) => {
+const recipesUrl = 'http://localhost:1337/favouriterecipes'
+
+const ResultCard = ({data, buttonContent}) => {
 
     const UserContext = useContext(LoggedUserContext);
 
-     const {name, image_url, tagline, description, ibu, ebc, abv, volume, ingredients, method} = data;
+
+    const {name, image_url, tagline, description, ibu, ebc, abv, volume, ingredients, method} = data;
+
+    const addToFavouritesHandler = () => {
+        // console.log(data);
+        axios.post(recipesUrl,
+            {
+              users_premissions_user: UserContext.user.username,
+              owner: UserContext.user.username,
+              recipe: data,
+              name: name
+            },
+            {
+              headers: {
+                Authorization:
+                  `Bearer ${UserContext.user.token}`,
+              },
+            })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error.response)
+            })
+    }
+
     return(
         <div className={resultCard}>
             <h3 className={h3}>{name}</h3>
@@ -40,7 +68,7 @@ const ResultCard = ({data, buttonContent, beerIndex}) => {
                 <li>Yeast {ingredients.yeast}</li>
                 <li>Temperature: <strong>{method.fermentation.temp.value} {method.fermentation.temp.unit}</strong></li>
             </ul>
-            {UserContext.user.isUserLoggedIn ? <Button content={buttonContent ? buttonContent : "Add to favourites"} beerIndex={beerIndex} style={{marginTop: 'auto'}} /> : null}
+            {UserContext.user.isUserLoggedIn ? <Button content={buttonContent ? buttonContent : "Add to favourites"} clickHandler={addToFavouritesHandler} style={{marginTop: 'auto'}} /> : null}
         </div>
     )
 }
