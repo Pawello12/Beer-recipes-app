@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 import Button from 'components/Button/Button';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
@@ -20,6 +21,8 @@ const Register = () => {
     const [registerInputs, setRegisterInputs] = useState(initialInputsValue)
 
     const [errorMessage, setErrorMessage] = useState('');
+
+    const [redistered, setRegistered] = useState(false);
 
     const verifyRegisterForm = () => {
         if (registerInputs.username === '' || registerInputs.password === '' || registerInputs.confirmPassword === '') {
@@ -68,6 +71,13 @@ const Register = () => {
                 console.log('Well done!');
                 console.log('User profile', response.data.user);
                 console.log('User token', response.data.jwt);
+                console.log(response);
+
+                localStorage.setItem('token', response.data.jwt);
+                localStorage.setItem('username', response.data.user.username);
+
+                setRegistered(true);
+
             })
             .catch(error => {
                 console.log('An error occurred:', error.response);
@@ -99,6 +109,7 @@ const Register = () => {
         <input type="password" id="confirmPassword" onChange={inputChangeHandler} value={registerInputs.confirmPassword} />
         <ErrorMessage error={errorMessage} />
         <Button content="Log In" clickHandler={sendNewUser} type="submit" />
+        {redistered ? <Redirect to="/search" /> : null}
     </form>
     )
 }
