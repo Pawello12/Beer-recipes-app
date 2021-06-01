@@ -171,7 +171,7 @@ const Search = () => {
     return(
         <>
             <SearchEngine inputChangeHandler={inputChangeHandler} searchValues={searchValues} searchHandler={searchHandler} getRandomBeer={getRandomBeer} isLoading={isLoading} isError={isError} />
-            {beers.map((beer, index) => <ResultCard key={index} data={beer} />)}
+            {beers.map((beer, index) => <ResultCard key={index} data={beer} beerIndex={index} />)}
             {nextBeers()}
             <FontAwesomeIcon icon={faArrowAltCircleUp} size="3x" onClick={scrollToTopHandler} className={`${topBtn} ${showBackToTop ? topBtnActive : null}`} />
         </>

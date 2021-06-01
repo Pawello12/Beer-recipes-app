@@ -5,7 +5,7 @@ import LoggedUserContext from 'context/LoggedUserContext';
 
 import { resultCard, img, ul, h4, h3, p } from 'components/ResultCard/ResultCard.module.scss';
 
-const ResultCard = ({data, buttonContent}) => {
+const ResultCard = ({data, buttonContent, beerIndex}) => {
 
     const UserContext = useContext(LoggedUserContext);
 
@@ -40,7 +40,7 @@ const ResultCard = ({data, buttonContent}) => {
                 <li>Yeast {ingredients.yeast}</li>
                 <li>Temperature: <strong>{method.fermentation.temp.value} {method.fermentation.temp.unit}</strong></li>
             </ul>
-            {UserContext.user.isUserLoggedIn ? <Button content={buttonContent ? buttonContent : "Add to favourites"} style={{marginTop: 'auto'}} /> : null}
+            {UserContext.user.isUserLoggedIn ? <Button content={buttonContent ? buttonContent : "Add to favourites"} beerIndex={beerIndex} style={{marginTop: 'auto'}} /> : null}
         </div>
     )
 }
