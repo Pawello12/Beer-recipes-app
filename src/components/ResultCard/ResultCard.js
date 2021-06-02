@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 
 import Button from 'components/Button/Button';
 import LoggedUserContext from 'context/LoggedUserContext';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 
 import { resultCard, img, ul, h4, h3, p } from 'components/ResultCard/ResultCard.module.scss';
 
@@ -10,8 +11,9 @@ const recipesUrl = 'http://localhost:1337/favouriterecipes'
 
 const ResultCard = ({data, buttonContent}) => {
 
+    const [showError, setShowError] = useState('');
     const UserContext = useContext(LoggedUserContext);
-
+    console.log(UserContext.user)
 
     const {name, image_url, tagline, description, ibu, ebc, abv, volume, ingredients, method} = data;
 
@@ -19,10 +21,11 @@ const ResultCard = ({data, buttonContent}) => {
         // console.log(data);
         axios.post(recipesUrl,
             {
-              users_premissions_user: UserContext.user.username,
-              owner: UserContext.user.username,
+              users_premissions_user: UserContext.user.userName,
+            //   owner: UserContext.user.userName,
               recipe: data,
-              name: name
+              name: name,
+              apiID: `${UserContext.user.userName}_${data.id}`
             },
             {
               headers: {
@@ -31,10 +34,14 @@ const ResultCard = ({data, buttonContent}) => {
               },
             })
             .then(response => {
-                console.log(response)
+                console.log(response);
+                setShowError('Added to favourites')
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error.response.status)
+                if (error.response.status === 500) {
+                    setShowError('Already in favourites')
+                }
             })
     }
 
@@ -68,7 +75,8 @@ const ResultCard = ({data, buttonContent}) => {
                 <li>Yeast {ingredients.yeast}</li>
                 <li>Temperature: <strong>{method.fermentation.temp.value} {method.fermentation.temp.unit}</strong></li>
             </ul>
-            {UserContext.user.isUserLoggedIn ? <Button content={buttonContent ? buttonContent : "Add to favourites"} clickHandler={addToFavouritesHandler} style={{marginTop: 'auto'}} /> : null}
+            {UserContext.user.isUserLoggedIn && !showError ? <Button content={buttonContent ? buttonContent : "Add to favourites"} clickHandler={addToFavouritesHandler} style={{marginTop: 'auto'}} /> : null}
+            {showError ? <ErrorMessage error={showError} /> : null}
         </div>
     )
 }
