@@ -19,10 +19,12 @@ const Favourites = () => {
 
 
     useEffect(() => {
+
+
+
         if (UserContext.user.userName) {
-        let isSubscribed = true;
-        if (isSubscribed) {
         axios.get(`${favouritesUrl}?owner=${UserContext.user.userName}`, {
+
             headers: {
                 Authorization:
                   `Bearer ${UserContext.user.token}`
@@ -35,8 +37,8 @@ const Favourites = () => {
             .catch(error => {
                 console.log(error.response)
             })
-        }
-            return () => isSubscribed = false;
+
+
     }
     },[])
 

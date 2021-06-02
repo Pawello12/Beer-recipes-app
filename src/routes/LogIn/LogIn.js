@@ -40,6 +40,8 @@ const LogIn = () => {
         }
     }
 
+
+
     const logInHandler = (e) => {
         e.preventDefault();
         const isApproved = verifyLoginForm();
