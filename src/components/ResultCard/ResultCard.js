@@ -13,7 +13,7 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
 
     const [showError, setShowError] = useState('');
     const UserContext = useContext(LoggedUserContext);
-    console.log(UserContext.user)
+    // console.log(UserContext.user)
 
     const {name, image_url, tagline, description, ibu, ebc, abv, volume, ingredients, method} = data;
 
@@ -34,11 +34,11 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
               },
             })
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 setShowError('Added to favourites')
             })
             .catch(error => {
-                console.log(error.response.status)
+                // console.log(error.response.status)
                 if (error.response.status === 500) {
                     setShowError('Already in favourites')
                 }
@@ -47,7 +47,7 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
 
     const removeFromFavouritesHandler = () => {
 
-        console.log(data.id)
+        // console.log(data.id)
         let targetId = '';
 
         axios.get(`${recipesUrl}?apiID=${UserContext.user.userName}_${data.id}`, {
@@ -58,7 +58,7 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
         })
         .then(response => {
             targetId = response.data[0].id;
-            console.log(targetId)
+            // console.log(targetId)
 
             axios.delete(`${recipesUrl}/${targetId}`, {
                 headers: {
@@ -67,7 +67,7 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
                 }
             })
              .then(response => {
-                console.log(response)
+                // console.log(response)
                 const newBeerList = beerList.filter(beer => beer.recipe.id !== data.id)
                 updateBeerList(newBeerList);
             })

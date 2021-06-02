@@ -52,7 +52,6 @@ const Search = () => {
         window.scrollTo(0, 0)
     }
 
-
     const inputChangeHandler = (e) => {
         setSearchValues({
             ...searchValues,
@@ -63,7 +62,7 @@ const Search = () => {
     const searchHandler = (e) => {
         e.preventDefault();
         if (isLoading === false) {
-            console.log(searchValues);
+            // console.log(searchValues);
             setIsError(false);
             setIsloading(true);
             setBeers([]);
@@ -89,7 +88,7 @@ const Search = () => {
                 params.push(`ibu_gt=${searchValues.minIBU}`)
             }
 
-            console.log(params);
+            // console.log(params);
             let customUrl;
 
             if (params.length > 0) {
@@ -98,16 +97,16 @@ const Search = () => {
                 customUrl = apiUrl;
             }
 
-            console.log(customUrl);
+            // console.log(customUrl);
             setLastUrl(customUrl);
             axios.get(customUrl)
                 .then(response => {
-                    console.log(response.data);
+                    // console.log(response.data);
                     const beerList = [];
                     response.data.forEach(beer => {
                         beerList.push(beer);
                     })
-                    console.log(beerList);
+                    // console.log(beerList);
                     setBeers(beerList);
                     setIsloading(false);
                     if (beerList.length > 24) {
@@ -125,12 +124,12 @@ const Search = () => {
     const getRandomBeer = (e) => {
         e.preventDefault();
         if (isLoading === false) {
-        console.log('random');
+        // console.log('random');
         setIsError(false);
         setIsloading(true);
         axios.get(randomUrl)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 const beerList = [];
                 beerList.push(response.data[0])
                 setBeers(beerList);
@@ -155,11 +154,11 @@ const Search = () => {
         axios.get(lastUrl + `&page=${page + 1}`)
             .then(response => {
                     const beerList = [];
-                    console.log(lastUrl + `&page=${page}`)
+                    // console.log(lastUrl + `&page=${page}`)
                     response.data.forEach(beer => {
                         beerList.push(beer);
                     })
-                    console.log(beerList);
+                    // console.log(beerList);
                     const nextpage = page + 1;
                     setPage(nextpage);
                     setBeers(beers.concat(beerList));

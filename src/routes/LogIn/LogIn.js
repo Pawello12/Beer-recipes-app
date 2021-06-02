@@ -49,7 +49,7 @@ const LogIn = () => {
                 password: inputValue.password
             })
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 setErrorMessage('');
                 localStorage.setItem('token', response.data.jwt);
                 localStorage.setItem('username', response.data.user.username);

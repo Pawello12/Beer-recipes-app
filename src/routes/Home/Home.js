@@ -9,7 +9,7 @@ import { home, name, description } from './Home.module.scss';
 const Home = () => {
 
     const UserContext = useContext(LoggedUserContext);
-    console.log(UserContext.user.isUserLoggedIn)
+    // console.log(UserContext.user.isUserLoggedIn)
 
     return (
         <div className={home}>

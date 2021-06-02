@@ -69,10 +69,9 @@ const Register = () => {
             .then(response => {
                 setErrorMessage('');
                 setRegisterInputs(initialInputsValue)
-                console.log('Well done!');
-                console.log('User profile', response.data.user);
-                console.log('User token', response.data.jwt);
-                console.log(response);
+                // console.log('User profile', response.data.user);
+                // console.log('User token', response.data.jwt);
+                // console.log(response);
 
                 localStorage.setItem('token', response.data.jwt);
                 localStorage.setItem('username', response.data.user.username);
@@ -99,7 +98,6 @@ const Register = () => {
             [e.target.id]: e.target.value
         })
     }
-
 
     return(
     <form className={register}>

@@ -12,13 +12,14 @@ const favouritesUrl = 'http://localhost:1337/favouriterecipes'
 const Favourites = () => {
 
     const [beer, setBeer] = useState([]);
-    const [showCard, setShowCard] = useState(false);
-    const [responseObjects, setResponseObjects] = useState([]);
+    // const [showCard, setShowCard] = useState(false);
+    // const [responseObjects, setResponseObjects] = useState([]);
 
     const UserContext = useContext(LoggedUserContext);
 
 
     useEffect(() => {
+        if (UserContext.user.userName) {
         let isSubscribed = true;
         if (isSubscribed) {
         axios.get(`${favouritesUrl}?owner=${UserContext.user.userName}`, {
@@ -28,7 +29,7 @@ const Favourites = () => {
             }
         })
             .then(response => {
-                console.log('response: ', response.data);
+                // console.log('response: ', response.data);
                 setBeer(response.data);
             })
             .catch(error => {
@@ -36,11 +37,8 @@ const Favourites = () => {
             })
         }
             return () => isSubscribed = false;
+    }
     },[])
-
-
-
-
 
     return (
         <>
