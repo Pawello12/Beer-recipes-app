@@ -46,8 +46,57 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
     }
 
     const removeFromFavouritesHandler = () => {
-        const newBeerList = beerList.filter(beer => beer.id !== data.id)
-        updateBeerList(newBeerList);
+
+        console.log(data.id)
+        let targetId = '';
+
+
+        axios.get(`${recipesUrl}?apiID=${UserContext.user.userName}_${data.id}`, {
+                headers: {
+                  Authorization:
+                    `Bearer ${UserContext.user.token}`,
+                }
+        })
+        .then(response => {
+            targetId = response.data[0].id;
+            console.log(targetId)
+
+            axios.delete(`${recipesUrl}/${targetId}`, {
+                headers: {
+                  Authorization:
+                    `Bearer ${UserContext.user.token}`,
+                }
+            })
+             .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+
+
+        // axios.delete(`${recipesUrl}/:${targetId}`, {
+        //     headers: {
+        //         Authorization:
+        //           `Bearer ${UserContext.user.token}`,
+        //       }
+        // })
+        // .then(response => {
+        //     console.log(response)
+        // })
+        // .catch(error => {
+        //     console.log(error.response)
+        // })
+
+        // frontend remove
+        // const newBeerList = beerList.filter(beer => beer.id !== data.id)
+        // updateBeerList(newBeerList);
     }
 
     return(
