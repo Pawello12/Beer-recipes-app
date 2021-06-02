@@ -82,7 +82,7 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
     }
 
     return(
-        <div className={resultCard}>
+        <div className={resultCard} >
             <h3 className={h3}>{name}</h3>
             {image_url ? <img className={img} src={image_url} alt="Name" /> : null}
             <h4 className={h4}>{tagline}</h4>

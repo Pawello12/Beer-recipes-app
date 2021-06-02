@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import ResultCard from 'components/ResultCard/ResultCard';
 import LoggedUserContext from 'context/LoggedUserContext';
 
-import { favourites } from 'routes/Favourites/Favourites.module.scss';
+import { favouritesHeader } from 'routes/Favourites/Favourites.module.scss';
 
 const favouritesUrl = 'http://localhost:1337/favouriterecipes'
 
@@ -40,12 +40,14 @@ const Favourites = () => {
 
 
 
+
+
     return (
-        <div className={favourites}>
-            <h2>Your favourite recipes</h2>
+        <>
+            <h2 className={favouritesHeader}>Your favourite recipes</h2>
             {beer.map((item, index) => <ResultCard key={index} data={item.recipe} buttonDelete={true} beerList={beer} updateBeerList={setBeer} />)}
             {!UserContext.user.isUserLoggedIn ? <Redirect to="/" /> : null}
-        </div>
+        </>
     )
 }
 
