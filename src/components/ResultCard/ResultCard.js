@@ -22,7 +22,7 @@ const ResultCard = ({data, buttonContent}) => {
         axios.post(recipesUrl,
             {
               users_premissions_user: UserContext.user.userName,
-            //   owner: UserContext.user.userName,
+              owner: UserContext.user.userName,
               recipe: data,
               name: name,
               apiID: `${UserContext.user.userName}_${data.id}`

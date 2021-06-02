@@ -7,26 +7,37 @@ import LoggedUserContext from 'context/LoggedUserContext';
 
 import { favourites } from 'routes/Favourites/Favourites.module.scss';
 
+const favouritesUrl = 'http://localhost:1337/favouriterecipes'
+
 const Favourites = () => {
 
     const [beer, setBeer] = useState([]);
     const [showCard, setShowCard] = useState(false);
+    const [responseObjects, setResponseObjects] = useState([]);
 
     const UserContext = useContext(LoggedUserContext);
 
+
     useEffect(() => {
-        axios.get('https://api.punkapi.com/v2/beers/random')
+        axios.get(`${favouritesUrl}?owner=${UserContext.user.userName}`, {
+            headers: {
+                Authorization:
+                  `Bearer ${UserContext.user.token}`
+            }
+        })
             .then(response => {
-                setBeer([...response.data])
-                console.log(beer);
-                setShowCard(true);
+                console.log('response: ', response.data);
+                setBeer(response.data);
+            })
+            .catch(error => {
+                console.log(error.response)
             })
     },[])
 
     return (
         <div className={favourites}>
             <h2>Your favourite recipes</h2>
-            {showCard ? <ResultCard buttonContent='Remove recipe' data={beer[0]} /> : null}
+            {beer.map((item, index) => <ResultCard key={index} data={item.recipe} buttonContent="Delete" />)}
             {!UserContext.user.isUserLoggedIn ? <Redirect to="/" /> : null}
         </div>
     )
