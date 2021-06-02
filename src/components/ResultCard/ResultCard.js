@@ -9,7 +9,7 @@ import { resultCard, img, ul, h4, h3, p } from 'components/ResultCard/ResultCard
 
 const recipesUrl = 'http://localhost:1337/favouriterecipes'
 
-const ResultCard = ({data, buttonContent}) => {
+const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList}) => {
 
     const [showError, setShowError] = useState('');
     const UserContext = useContext(LoggedUserContext);
@@ -45,6 +45,11 @@ const ResultCard = ({data, buttonContent}) => {
             })
     }
 
+    const removeFromFavouritesHandler = () => {
+        const newBeerList = beerList.filter(beer => beer.id !== data.id)
+        updateBeerList(newBeerList);
+    }
+
     return(
         <div className={resultCard}>
             <h3 className={h3}>{name}</h3>
@@ -75,7 +80,8 @@ const ResultCard = ({data, buttonContent}) => {
                 <li>Yeast {ingredients.yeast}</li>
                 <li>Temperature: <strong>{method.fermentation.temp.value} {method.fermentation.temp.unit}</strong></li>
             </ul>
-            {UserContext.user.isUserLoggedIn && !showError ? <Button content={buttonContent ? buttonContent : "Add to favourites"} clickHandler={addToFavouritesHandler} style={{marginTop: 'auto'}} /> : null}
+            {UserContext.user.isUserLoggedIn && !showError &&  ! buttonDelete ? <Button content={buttonContent ? buttonContent : "Add to favourites"} clickHandler={addToFavouritesHandler} style={{marginTop: 'auto'}} /> : null}
+            {buttonDelete ? <Button content="Delete" style={{marginTop: 'auto'}} clickHandler={removeFromFavouritesHandler} /> : null}
             {showError ? <ErrorMessage error={showError} /> : null}
         </div>
     )

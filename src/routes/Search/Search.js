@@ -41,7 +41,11 @@ const Search = () => {
     }
 
     useEffect(() => {
+        let isSubscribed = true;
+        if (isSubscribed) {
         window.addEventListener('scroll', showButton)
+        }
+        return () => isSubscribed = false;
     }, [])
 
     const scrollToTopHandler = () => {

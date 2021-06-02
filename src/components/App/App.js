@@ -47,10 +47,14 @@ function App() {
   }
 
   useEffect(() => {
+    let isSubscribed = true;
+    if (isSubscribed) {
     updateUserState();
     window.addEventListener('storage', () => {
       updateUserState();
     })
+    }
+    return () => isSubscribed = false;
   }, [])
 
 

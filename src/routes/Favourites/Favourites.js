@@ -19,6 +19,8 @@ const Favourites = () => {
 
 
     useEffect(() => {
+        let isSubscribed = true;
+        if (isSubscribed) {
         axios.get(`${favouritesUrl}?owner=${UserContext.user.userName}`, {
             headers: {
                 Authorization:
@@ -32,12 +34,16 @@ const Favourites = () => {
             .catch(error => {
                 console.log(error.response)
             })
+        }
+            return () => isSubscribed = false;
     },[])
+
+
 
     return (
         <div className={favourites}>
             <h2>Your favourite recipes</h2>
-            {beer.map((item, index) => <ResultCard key={index} data={item.recipe} buttonContent="Delete" />)}
+            {beer.map((item, index) => <ResultCard key={index} data={item.recipe} buttonDelete={true} beerList={beer} updateBeerList={setBeer} />)}
             {!UserContext.user.isUserLoggedIn ? <Redirect to="/" /> : null}
         </div>
     )
