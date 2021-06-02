@@ -1,10 +1,14 @@
 $black: #000;
-$white: #fff;
-$primary: #5BEB67;
-$secondary: #ebc567;
-$red: #EB5B8E;
+$white: rgba(255, 255, 255, 0.95);
+// $primary: #5BEB67;
+$primary: rgba(20, 20, 20, 0.4);
+// $secondary: #ebc567;
+$secondary: rgba(151, 143, 143, 0.8);
+// $red: #EB5B8E;
+$red: rgba(230, 218, 218, 0.9);
 $green: #74EB7E;
-$background-color: #8AA5EB;
+// $background-color: #8AA5EB;
+$background-color: rgba(41, 41, 41, 0.9);
 
 $main-font-family: 'Roboto',
 sans-serif;

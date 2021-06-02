@@ -2,9 +2,9 @@ import React from 'react';
 
 import {errorMessage} from 'components/ErrorMessage/ErrorMessage.module.scss';
 
-const ErrorMessage = ({error}) => {
+const ErrorMessage = ({error, style}) => {
     return(
-        <p className={errorMessage}>{error}</p>
+        <p className={errorMessage} style={style} >{error}</p>
     )
 }
 

@@ -113,7 +113,7 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
             </ul>
             {UserContext.user.isUserLoggedIn && !showError &&  ! buttonDelete ? <Button content={buttonContent ? buttonContent : "Add to favourites"} clickHandler={addToFavouritesHandler} style={{marginTop: 'auto'}} /> : null}
             {buttonDelete ? <Button content="Delete" style={{marginTop: 'auto'}} clickHandler={removeFromFavouritesHandler} /> : null}
-            {showError ? <ErrorMessage error={showError} /> : null}
+            {showError ? <ErrorMessage error={showError} style={{marginTop: "auto", marginBottom: "32px", fontSize: "16px"}} /> : null}
         </div>
     )
 }
