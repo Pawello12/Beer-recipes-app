@@ -50,7 +50,6 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
         console.log(data.id)
         let targetId = '';
 
-
         axios.get(`${recipesUrl}?apiID=${UserContext.user.userName}_${data.id}`, {
                 headers: {
                   Authorization:
@@ -69,6 +68,8 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
             })
              .then(response => {
                 console.log(response)
+                const newBeerList = beerList.filter(beer => beer.recipe.id !== data.id)
+                updateBeerList(newBeerList);
             })
             .catch(error => {
                 console.log(error)
@@ -78,25 +79,6 @@ const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList
         .catch(error => {
             console.log(error)
         })
-
-
-
-        // axios.delete(`${recipesUrl}/:${targetId}`, {
-        //     headers: {
-        //         Authorization:
-        //           `Bearer ${UserContext.user.token}`,
-        //       }
-        // })
-        // .then(response => {
-        //     console.log(response)
-        // })
-        // .catch(error => {
-        //     console.log(error.response)
-        // })
-
-        // frontend remove
-        // const newBeerList = beerList.filter(beer => beer.id !== data.id)
-        // updateBeerList(newBeerList);
     }
 
     return(
