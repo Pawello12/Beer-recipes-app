@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { useStateIfMounted } from 'use-state-if-mounted';
 
 import Button from 'components/Button/Button';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
@@ -19,7 +20,7 @@ const initialInputsValue = {
 
 const Register = () => {
 
-    const [registerInputs, setRegisterInputs] = useState(initialInputsValue)
+    const [registerInputs, setRegisterInputs] = useStateIfMounted(initialInputsValue)
     const [errorMessage, setErrorMessage] = useState('');
     const [redistered, setRegistered] = useState(false);
 

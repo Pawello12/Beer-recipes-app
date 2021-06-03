@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { useStateIfMounted } from 'use-state-if-mounted';
 
 import Button from 'components/Button/Button';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
@@ -17,7 +18,7 @@ const initialInputValue = {
 
 const LogIn = () => {
 
-    const [inputValue, setInputValue] = useState(initialInputValue);
+    const [inputValue, setInputValue] = useStateIfMounted(initialInputValue);
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
