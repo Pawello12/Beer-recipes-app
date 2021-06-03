@@ -12,6 +12,7 @@ import Search from 'routes/Search/Search';
 import Favourites from 'routes/Favourites/Favourites';
 import LogIn from 'routes/LogIn/LogIn';
 import Register from 'routes/Register/Register';
+import ErrorPage from 'routes/ErrorPage/ErrorPage';
 
 import LoggedUserContext from 'context/LoggedUserContext';
 
@@ -85,6 +86,10 @@ function App() {
 
             <Route path='/favourites'>
               <Favourites />
+            </Route>
+
+            <Route>
+              <ErrorPage />
             </Route>
           </Switch>
         </Router>
