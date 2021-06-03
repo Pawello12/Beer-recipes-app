@@ -7,7 +7,7 @@ import LoggedUserContext from 'context/LoggedUserContext';
 
 import { favouritesHeader } from 'routes/Favourites/Favourites.module.scss';
 
-const favouritesUrl = 'http://localhost:1337/favouriterecipes'
+const favouritesUrl = 'https://beer-recipes-app-backend.herokuapp.com/favouriterecipes'
 
 const Favourites = () => {
 

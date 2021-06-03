@@ -18,7 +18,7 @@ import LoggedUserContext from 'context/LoggedUserContext';
 import 'components/App/App.module.scss';
 import {backgroundContainer} from 'components/App/App.module.scss';
 
-const authUrl = 'http://localhost:1337/auth/local';
+const authUrl = 'https://beer-recipes-app-backend.herokuapp.com/auth/local';
 
 function App() {
 

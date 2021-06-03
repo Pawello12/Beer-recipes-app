@@ -9,7 +9,7 @@ import LoggedUserContext from 'context/LoggedUserContext';
 
 import {logIn} from 'routes/LogIn/LogIn.module.scss';
 
-const loginUrl = 'http://localhost:1337/auth/local';
+const loginUrl = 'https://beer-recipes-app-backend.herokuapp.com/auth/local';
 
 const initialInputValue = {
     login: '',

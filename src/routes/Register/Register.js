@@ -9,7 +9,7 @@ import LoggedUserContext from 'context/LoggedUserContext';
 
 import {register} from 'routes/Register/Register.module.scss';
 
-const registerUrl = 'http://localhost:1337/auth/local/register';
+const registerUrl = 'https://beer-recipes-app-backend.herokuapp.com/auth/local/register';
 
 const initialInputsValue = {
         username: '',

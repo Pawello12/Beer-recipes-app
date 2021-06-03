@@ -7,7 +7,7 @@ import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 
 import { resultCard, img, ul, h4, h3, p } from 'components/ResultCard/ResultCard.module.scss';
 
-const recipesUrl = 'http://localhost:1337/favouriterecipes'
+const recipesUrl = 'https://beer-recipes-app-backend.herokuapp.com/favouriterecipes'
 
 const ResultCard = ({data, buttonContent, buttonDelete, beerList, updateBeerList}) => {
 
