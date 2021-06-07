@@ -41,6 +41,6 @@ Project is created with:
 - CSS Modules
 - Axios
 
-## 🎉 PUNK API <a name = "punkapi"></a>
+## PUNK API <a name = "punkapi"></a>
 
 - [PUNK API website](https://punkapi.com/)
