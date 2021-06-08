@@ -3,3 +3,7 @@
 .logIn {
     @include form;
 }
+
+.info {
+    @include sleepInfo;
+}

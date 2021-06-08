@@ -53,3 +53,25 @@ $enormous: 60px;
         font-size: $small;
     }
 }
+
+@mixin sleepInfo {
+    font-size: $extra-small;
+    // margin: 50px auto auto;
+    max-width: 300px;
+    width: 80vw;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: $primary;
+    padding: 10px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @media (orientation: landscape) and (max-height: 420px) {
+        left: 10px;
+        transform: none;
+        max-width: 130px;
+    }
+}

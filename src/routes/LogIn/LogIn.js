@@ -7,7 +7,7 @@ import Button from 'components/Button/Button';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import LoggedUserContext from 'context/LoggedUserContext';
 
-import {logIn} from 'routes/LogIn/LogIn.module.scss';
+import {logIn, info } from 'routes/LogIn/LogIn.module.scss';
 
 const loginUrl = 'https://beer-recipes-app-backend.herokuapp.com/auth/local';
 
@@ -41,8 +41,6 @@ const LogIn = () => {
         }
     }
 
-
-
     const logInHandler = (e) => {
         e.preventDefault();
         const isApproved = verifyLoginForm();
@@ -71,6 +69,7 @@ const LogIn = () => {
     }
 
     return(
+        <>
         <form className={logIn}>
             <h2>Log In</h2>
             <label htmlFor="login">Login:</label>
@@ -82,6 +81,8 @@ const LogIn = () => {
             {isLoggedIn ? <Redirect to="/search" /> : null}
             {UserContext.user.isUserLoggedIn ? <Redirect to="/search" /> : null}
         </form>
+        <p className={info} >When the app is idle for a while, the backend API goes to sleep because of the free plan on Heroku. It then needs a moment to start working again. Therefore, the first login attempts may wait a little longer for a response.</p>
+        </>
     )
 }
 

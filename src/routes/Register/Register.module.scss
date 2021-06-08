@@ -3,3 +3,7 @@
 .register {
     @include form;
 }
+
+.info {
+    @include sleepInfo;
+}
