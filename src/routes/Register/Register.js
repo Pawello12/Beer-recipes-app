@@ -6,6 +6,7 @@ import { useStateIfMounted } from 'use-state-if-mounted';
 import Button from 'components/Button/Button';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import LoggedUserContext from 'context/LoggedUserContext';
+import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 
 import {register, info} from 'routes/Register/Register.module.scss';
 
@@ -23,6 +24,7 @@ const Register = () => {
     const [registerInputs, setRegisterInputs] = useStateIfMounted(initialInputsValue)
     const [errorMessage, setErrorMessage] = useState('');
     const [redistered, setRegistered] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const UserContext = useContext(LoggedUserContext);
 
@@ -61,6 +63,7 @@ const Register = () => {
         e.preventDefault();
         const isApproved = verifyRegisterForm();
         if (isApproved) {
+            setIsLoading(true);
         axios
             .post(registerUrl, {
                 username: registerInputs.username,
@@ -82,12 +85,13 @@ const Register = () => {
                     token: response.data.jwt
                 })
                 setRegistered(true);
-
+                setIsLoading(false);
             })
             .catch(error => {
                 console.log('An error occurred:', error.response);
                 setErrorMessage(error.response.data.message[0].messages[0].message);
-                console.log(error.response.data.message[0].messages[0].message)
+                console.log(error.response.data.message[0].messages[0].message);
+                setIsLoading(false);
             })
         }
     }
@@ -114,6 +118,7 @@ const Register = () => {
         <input type="password" id="confirmPassword" onChange={inputChangeHandler} value={registerInputs.confirmPassword} />
         <ErrorMessage error={errorMessage} />
         <Button content="Register" clickHandler={sendNewUser} type="submit" />
+        <LoadingSpinner isLoading={isLoading} />
         {redistered ? <Redirect to="/search" /> : null}
         {UserContext.user.isUserLoggedIn ? <Redirect to="/search" /> : null}
     </form>

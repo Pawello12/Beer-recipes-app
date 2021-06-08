@@ -6,6 +6,7 @@ import { useStateIfMounted } from 'use-state-if-mounted';
 import Button from 'components/Button/Button';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import LoggedUserContext from 'context/LoggedUserContext';
+import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 
 import {logIn, info } from 'routes/LogIn/LogIn.module.scss';
 
@@ -21,6 +22,7 @@ const LogIn = () => {
     const [inputValue, setInputValue] = useStateIfMounted(initialInputValue);
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const UserContext = useContext(LoggedUserContext)
 
@@ -45,6 +47,7 @@ const LogIn = () => {
         e.preventDefault();
         const isApproved = verifyLoginForm();
         if (isApproved) {
+            setIsLoading(true);
             axios.post(loginUrl, {
                 identifier: inputValue.login,
                 password: inputValue.password
@@ -59,11 +62,13 @@ const LogIn = () => {
                     token: response.data.jwt,
                     isUserLoggedIn: true
                 })
+                setIsLoading(false);
                 setIsLoggedIn(true);
             })
             .catch(error => {
                 console.log(error.response);
                 setErrorMessage(error.response.data.data[0].messages[0].message);
+                setIsLoading(false);
             })
         }
     }
@@ -78,6 +83,7 @@ const LogIn = () => {
             <input type="password" id="password" value={inputValue.password} onChange={updateInputValue} />
             <ErrorMessage error={errorMessage} />
             <Button content="Log In" clickHandler={logInHandler} type="submit" />
+            <LoadingSpinner isLoading={isLoading} />
             {isLoggedIn ? <Redirect to="/search" /> : null}
             {UserContext.user.isUserLoggedIn ? <Redirect to="/search" /> : null}
         </form>
