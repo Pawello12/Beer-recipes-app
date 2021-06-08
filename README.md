@@ -11,6 +11,8 @@
 
 https://beer-recipe-app.netlify.app
 
+When the app is idle for a while, the backend api goes to sleep because of the free plan on Heroku. It then needs a moment to start working again. Therefore, the first login attempts may wait a little longer for a response.
+
 ### Installing
 
 Clone this repo to your machine and type:
