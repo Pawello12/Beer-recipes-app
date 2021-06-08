@@ -6,7 +6,7 @@ import ResultCard from 'components/ResultCard/ResultCard';
 import LoggedUserContext from 'context/LoggedUserContext';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 
-import { favouritesHeader } from 'routes/Favourites/Favourites.module.scss';
+import { favouritesHeader, favouritesEmpty } from 'routes/Favourites/Favourites.module.scss';
 
 const favouritesUrl = 'https://beer-recipes-app-backend.herokuapp.com/favouriterecipes'
 
@@ -48,6 +48,7 @@ const Favourites = () => {
             <h2 className={favouritesHeader}>Your favourite recipes</h2>
             {isLoading ? <LoadingSpinner isLoading style={{gridColumn: "1/-1"}} /> : null}
             {beer.map((item, index) => <ResultCard key={index} data={item.recipe} buttonDelete={true} beerList={beer} updateBeerList={setBeer} />)}
+            {beer.length === 0 && isLoading === false ? <p className={favouritesEmpty}>You don't have any recipes in your favorites yet.</p> : null}
             {!UserContext.user.isUserLoggedIn ? <Redirect to="/" /> : null}
         </>
     )
